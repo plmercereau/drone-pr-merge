@@ -1,0 +1,27 @@
+## Drone CI/CD test repo
+
+Meant to understand how to handle the Drone.io environment variables depending on branches, tags, pull requests, PR merges...
+
+### Push on master
+
+CI_BUILD_TARGET=
+CI_BUILD_EVENT=push
+CI_COMMIT_BRANCH=master
+CI_COMMIT_SHA=6a3252a146e28882dc7fabbd589db9585cf9fd32
+CI_COMMIT_REF=refs/heads/master
+DRONE_BRANCH=master
+DRONE_TARGET_BRANCH=master
+DRONE_COMMIT_BRANCH=master
+DRONE_REPO_PRIVATE=false
+DRONE_COMMIT_BEFORE=e05f3e0dbc12240d5a6c4d71f4a3fd4565f63b64
+DRONE_BUILD_ACTION=
+DRONE_SOURCE_BRANCH=master
+DRONE_STAGE_NAME=main
+DRONE_REPO_BRANCH=master
+DRONE_DEPLOY_TO=
+DRONE_COMMIT_AFTER=6a3252a146e28882dc7fabbd589db9585cf9fd32
+DRONE_COMMIT=6a3252a146e28882dc7fabbd589db9585cf9fd32
+DRONE_WORKSPACE_PATH=
+DRONE_BUILD_EVENT=push
+DRONE_COMMIT_SHA=6a3252a146e28882dc7fabbd589db9585cf9fd32
+DRONE_COMMIT_REF=refs/heads/master
