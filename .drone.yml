@@ -9,3 +9,4 @@ steps:
     image: node:alpine
     commands:
       - env
+      - ls
