@@ -2,11 +2,22 @@ kind: pipeline
 type: docker
 name: main
 trigger:
-  branch:
-    - master
+  event:
+    include:
+      - push
+      - pull_request
+      - tag
+      - promote
+      - rollback
+  # branch:
+  #   exclude:
+  #     - bidon
+  # ref:
+  #   include:
+  #     - refs/*
 steps:
-  - name: build-packages
+  - name: log
     image: node:alpine
     commands:
-      - env
+      - env | sort
       - ls
