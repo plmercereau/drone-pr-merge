@@ -9,12 +9,12 @@ trigger:
       - tag
       - promote
       - rollback
-  branch:
-    exclude:
-      - bidon
-  ref:
-    include:
-      - refs/*
+  # branch:
+  #   exclude:
+  #     - bidon
+  # ref:
+  #   include:
+  #     - refs/*
 steps:
   - name: build-packages
     image: node:alpine
