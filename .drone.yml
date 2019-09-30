@@ -16,8 +16,8 @@ trigger:
   #   include:
   #     - refs/*
 steps:
-  - name: build-packages
+  - name: log
     image: node:alpine
     commands:
-      - env
+      - env | sort
       - ls
