@@ -1,0 +1,11 @@
+kind: pipeline
+type: docker
+name: main
+trigger:
+  branch:
+    - master
+steps:
+  - name: build-packages
+    image: node:alpine
+    commands:
+      - env
