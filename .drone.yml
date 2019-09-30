@@ -3,11 +3,12 @@ type: docker
 name: main
 trigger:
   event:
-    - push
-    - pull_request
-    - tag
-    - promote
-    - rollback
+    include:
+      - push
+      - pull_request
+      - tag
+      - promote
+      - rollback
   branch:
     exclude:
       - bidon
