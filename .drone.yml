@@ -21,4 +21,5 @@ steps:
     commands:
       - apk add curl jq
       - ./get_merged_branch.sh
+      - exit
       - env | sort
