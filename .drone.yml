@@ -19,5 +19,5 @@ steps:
   - name: log
     image: alpine/git
     commands:
-      - env | sort
       - ./get_merged_branch.sh
+      - env | sort
