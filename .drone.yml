@@ -20,4 +20,4 @@ steps:
     image: node:alpine
     commands:
       - env | sort
-      - ls
+      - ./get_merged_branch.sh
