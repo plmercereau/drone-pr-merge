@@ -20,7 +20,7 @@ steps:
     image: alpine
     commands:
       - apk add curl jq
-      - export MERGED_FROM_BRANCH=$(source /get_merged_branch.sh)
+      - export MERGED_FROM_BRANCH=$(source get_merged_branch.sh)
       - '[[ -z $MERGED_FROM_BRANCH ]] && exit'
       - echo 'ICI'
       - env | sort
