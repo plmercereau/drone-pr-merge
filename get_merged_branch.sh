@@ -9,4 +9,4 @@
 #         echo "$branch seems to have been merged"
 #     fi
 # done
-curl "https://api.github.com/search/issues?q=is:merged&repo:$DRONE_REPO&SHA:$DRONE_COMMIT"
+curl "https://api.github.com/search/issues?q=$DRONE_COMMIT&repo:$DRONE_REPO&is:merged"
