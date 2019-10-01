@@ -17,7 +17,8 @@ trigger:
   #     - refs/*
 steps:
   - name: log
-    image: node:alpine
+    image: alpine
     commands:
+      - apk add curl jq
+      - ./get_merged_branch.sh
       - env | sort
-      - ls
