@@ -6,6 +6,4 @@ if [ $total_count = 1 ]; then
     pr_payload=$(curl -s "https://api.github.com/repos/$DRONE_REPO/pulls/$pull_request_number")
     initial_branch=$( echo "$pr_payload" | jq -r '.head.ref')
     echo "$initial_branch"
-else
-  echo "try again"
 fi
