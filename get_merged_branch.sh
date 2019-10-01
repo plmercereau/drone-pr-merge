@@ -11,4 +11,6 @@ if [ $total_count = 1 ]; then
         initial_branch=$(echo "$pr_payload" | jq -r '.head.ref')
         echo "$initial_branch"
     fi
+else
+    exit
 fi
