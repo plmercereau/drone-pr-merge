@@ -19,6 +19,6 @@ steps:
   - name: log
     image: alpine
     commands:
-      - apk add curl
+      - apk add curl jq
       - ./get_merged_branch.sh
       - env | sort
