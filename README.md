@@ -1,4 +1,4 @@
-## Handling Pull Request mergers with Drone.io CI/CD and the GitHub API
+## Handling Pull Request mergers with Drone CD and the GitHub API
 
 This is a very small example of a workaround to allow Drone.io to handle PR merge events.
 This repo is rather a proof of concept, but contributions are welcome to make it more effective, while waiting for the Drone team to implement some kind of a 'pull_request_merge' event.
