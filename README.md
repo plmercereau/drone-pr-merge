@@ -1,102 +1,10 @@
-## Drone CI/CD test repo
+## Handling Pull Request mergers with Drone.io CI/CD and the GitHub API
 
-Meant to understand how to handle the Drone.io environment variables depending on branches, tags, pull requests, PR merges...
+This is a very small example of a workaround to allow Drone.io to handle PR merge events.
+This repo is rather a proof of concept, but contributions are welcome to make it more effective, while waiting for the Drone team to implement some kind of a 'pull_request_merge' event.
 
-### Push on master branch
+The `get_merged_branch.sh` script reaches the GitHub API to get the right information from the GitHub API, and prints the orginial branch of the PR.
 
-CI_BUILD_TARGET=
-CI_BUILD_EVENT=push
-CI_COMMIT_BRANCH=master
-CI_COMMIT_SHA=6a3252a146e28882dc7fabbd589db9585cf9fd32
-CI_COMMIT_REF=refs/heads/master
-DRONE_BRANCH=master
-DRONE_BUILD_ACTION=
-DRONE_BUILD_EVENT=push
-DRONE_COMMIT=6a3252a146e28882dc7fabbd589db9585cf9fd32
-DRONE_COMMIT_AFTER=6a3252a146e28882dc7fabbd589db9585cf9fd32
-DRONE_COMMIT_BEFORE=e05f3e0dbc12240d5a6c4d71f4a3fd4565f63b64
-DRONE_COMMIT_BRANCH=master
-DRONE_COMMIT_REF=refs/heads/master
-DRONE_COMMIT_SHA=6a3252a146e28882dc7fabbd589db9585cf9fd32
-DRONE_DEPLOY_TO=
-DRONE_REPO_BRANCH=master
-DRONE_SOURCE_BRANCH=master
-DRONE_STAGE_NAME=main
-DRONE_TARGET_BRANCH=master
+This script can be then called in a Drone pipeline (or any similar CI/CD platform). In the `.drone.yml` of this repo, the output is stored in an environment variable: `export MERGED_FROM_BRANCH=$(./get_merged_branch.sh)`. If the output is empty, then the ongoing step stops with `'[[ -z $MERGED_FROM_BRANCH ]] && exit'`.
 
-### Push on dev branch
-
-CI_BUILD_EVENT=push
-CI_BUILD_TARGET=
-CI_COMMIT_BRANCH=dev
-CI_COMMIT_REF=refs/heads/dev
-CI_COMMIT_SHA=cb3a79b0f4c74767177dbc38a4e9fd2d63ed2242
-DRONE_BRANCH=dev
-DRONE_BUILD_ACTION=
-DRONE_BUILD_EVENT=push
-DRONE_COMMIT=cb3a79b0f4c74767177dbc38a4e9fd2d63ed2242
-DRONE_COMMIT_AFTER=cb3a79b0f4c74767177dbc38a4e9fd2d63ed2242
-DRONE_COMMIT_BEFORE=3dd673708ac76079a8a236078ca745149449f988
-DRONE_COMMIT_BRANCH=dev
-DRONE_COMMIT_REF=refs/heads/dev
-DRONE_COMMIT_SHA=cb3a79b0f4c74767177dbc38a4e9fd2d63ed2242
-DRONE_DEPLOY_TO=
-DRONE_REPO_BRANCH=master
-DRONE_SOURCE_BRANCH=dev
-DRONE_STAGE_NAME=main
-DRONE_TARGET_BRANCH=dev
-
-### Pull request from dev to master
-
-CI_BUILD_EVENT=pull_request
-CI_BUILD_TARGET=
-CI_COMMIT_BRANCH=master
-CI_COMMIT_REF=refs/pull/1/head
-CI_COMMIT_SHA=cb3a79b0f4c74767177dbc38a4e9fd2d63ed2242
-CI_REPO=plmercereau/test
-CI_WORKSPACE_PATH=
-DRONE_BRANCH=master
-DRONE_BUILD_ACTION=opened
-DRONE_BUILD_EVENT=pull_request
-DRONE_COMMIT=cb3a79b0f4c74767177dbc38a4e9fd2d63ed2242
-DRONE_COMMIT_AFTER=cb3a79b0f4c74767177dbc38a4e9fd2d63ed2242
-DRONE_COMMIT_BEFORE=6a3252a146e28882dc7fabbd589db9585cf9fd32
-DRONE_COMMIT_BRANCH=master
-DRONE_COMMIT_REF=refs/pull/1/head
-DRONE_COMMIT_SHA=cb3a79b0f4c74767177dbc38a4e9fd2d63ed2242
-DRONE_DEPLOY_TO=
-DRONE_PULL_REQUEST=1
-DRONE_REPO_BRANCH=master
-DRONE_SOURCE_BRANCH=dev
-DRONE_TARGET_BRANCH=master
-
-### Another push on dev while under a PR
-
-Two events:
-
-- another push on dev
-- another PR event
-
-### Merge pull request
-
-CI_BUILD_EVENT=push
-CI_BUILD_TARGET=
-CI_COMMIT_BRANCH=master
-CI_COMMIT_REF=refs/heads/master
-CI_COMMIT_SHA=d37d3b1950f60eb2b2d7b97bb01f539fde950884
-CI_JOB_FINISHED=1569865375
-CI_WORKSPACE_PATH=
-DRONE_BRANCH=master
-DRONE_BUILD_ACTION=
-DRONE_BUILD_EVENT=push
-DRONE_BUILD_LINK=https://cloud.drone.io/plmercereau/test/7
-DRONE_COMMIT=d37d3b1950f60eb2b2d7b97bb01f539fde950884
-DRONE_COMMIT_AFTER=d37d3b1950f60eb2b2d7b97bb01f539fde950884
-DRONE_COMMIT_BEFORE=6a3252a146e28882dc7fabbd589db9585cf9fd32
-DRONE_COMMIT_BRANCH=master
-DRONE_COMMIT_REF=refs/heads/master
-DRONE_COMMIT_SHA=d37d3b1950f60eb2b2d7b97bb01f539fde950884
-DRONE_DEPLOY_TO=
-DRONE_REPO_BRANCH=master
-DRONE_SOURCE_BRANCH=master
-DRONE_TARGET_BRANCH=master
+Please note that the script requires `jq` and `curl` (not installed in Alpine by default).

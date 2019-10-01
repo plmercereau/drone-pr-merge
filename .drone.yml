@@ -3,22 +3,12 @@ type: docker
 name: main
 trigger:
   event:
-    include:
-      - push
-      - pull_request
-      - tag
-      - promote
-      - rollback
-  # branch:
-  #   exclude:
-  #     - bidon
-  # ref:
-  #   include:
-  #     - refs/*
+    - push
 steps:
   - name: log
     image: alpine
     commands:
       - apk add curl jq
-      - ./get_merged_branch.sh
-      - env | sort
+      - export MERGED_FROM_BRANCH=$(./get_merged_branch.sh)
+      - '[[ -z $MERGED_FROM_BRANCH ]] && exit'
+      - echo "won't be reached if the push is not a pull request merge"
