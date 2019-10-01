@@ -5,6 +5,7 @@ echo "1"
 current_branch="$DRONE_BRANCH"
 echo "2"
 git branch --merged
+git branch -r
 for branch in $(git branch --merged --format "%(refname:strip=2)"); do
 echo "3"
 echo "$branch"
